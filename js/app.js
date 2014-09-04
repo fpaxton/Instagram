@@ -1,0 +1,42 @@
+//hidden list item is also updating
+//figure out how to pass the inputed tag
+
+$(document).ready(function() {
+	$('.pics').submit(function(event){
+		// zero out results if previous search has run
+		//$('#target').html('');
+
+		//get the value of the tags the user submitted
+		var location = $(this).find("input[name='place']").val();
+		getTagTotals(location);
+	});
+});
+
+var showTagTotals = function(data) {
+	var result = $('.template ol li:first-child').clone();
+	result.text(data.media_count);
+	return result;
+};
+
+var getTagTotals = function(tag) {
+	// the parameters we need to pass in our request to StackOverflow's API
+	var request = {	tag_name : tag,
+					client_id : '4368195e3c034a8489f50f4f9012797a',
+				};
+	
+	var result = $.ajax({
+		url: "https://api.instagram.com/v1/tags/"+ request.tag_name,
+		data: request,		
+		dataType: "jsonp",
+		type: "GET",
+	})
+	.done(function(result){
+		rank = showTagTotals(result.data);
+		$('#target ol').prepend(rank);
+	})
+	.fail(function(jqXHR, error, errorThrown){
+		console.log("your response is bad and you should feel bad");
+		//var errorElem = showError(error);
+		//$('.search-results').append(errorElem);
+	});
+};
