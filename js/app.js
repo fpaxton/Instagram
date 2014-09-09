@@ -1,14 +1,12 @@
-//hidden list item is also updating
-//figure out how to pass the inputed tag
-
 $(document).ready(function() {
-	$('.pics').submit(function(event){
+	$('#input_tag').submit(function(event){
 		// zero out results if previous search has run
 		//$('#target').html('');
 
 		//get the value of the tags the user submitted
-		var location = $(this).find("input[name='place']").val();
-		getTagTotals(location);
+		var tag = $(this).find("input[name='place']").val();
+		getTagTotals(tag);
+		$('#input_tag').children('#text').val('');
 	});
 });
 
@@ -23,10 +21,10 @@ var getTagTotals = function(tag) {
 	var request = {	tag_name : tag,
 					client_id : '4368195e3c034a8489f50f4f9012797a',
 				};
-	
+
 	var result = $.ajax({
 		url: "https://api.instagram.com/v1/tags/"+ request.tag_name,
-		data: request,		
+		data: request,
 		dataType: "jsonp",
 		type: "GET",
 	})
