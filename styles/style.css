@@ -3,30 +3,44 @@
 	/*display:none;*/
 }
 
+html {
+	/*overflow-y: scroll;*/
+	height:100%;
+}
+
+
+html, body {
+	margin-top:0;
+	padding-top:0;
+	margin-bottom:0;
+	padding-bottom:0;
+}
+
 body {
+	height:100%;
 	background-color:#F7F7F7;
 	color:#005078;
 	font-family:"Trebuchet MS";
 }
 
-#header_container {
+/*#header_container {
 	position:relative;
+	background-color:#005078;
 	width:44%;
 	height:100%;
 	float:left;
-}
+	left: 20px;
+}*/
 
 header {
-	position:relative;
+	position:fixed;
+	left:20px;
+	width:44%;
 	height:100%;
 	background-color:#005078;
-	color:#F7F7F7 ;
-	top:0px;
-	bottom:0px;
+	color:#F7F7F7;
 	padding-top:11em;
 	padding-bottom:17.5em;
-	border-radius:5px;
-
 }
 
 h1 {
@@ -76,4 +90,5 @@ form input:last-child {
 #target ol li {
 	position:relative;
 	left: 1em;
+	font-size:.5em;
 }
