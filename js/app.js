@@ -12,18 +12,14 @@ $(document).ready(function() {
 
 var showTagTotals = function(data) {
 	var result = $('.template ol li:first-child').clone();
-	// attempting indentions
-	// var obj = data;
-	// console.log(obj);
-	// var str = JSON.stringify(obj,null, 2); // indentation level = 2
-	// console.log(str);
-	// result.text(str);
-	//previous ugly print out
-	var print = "#" + data.name + " " + data.media_count;
-	//result.text("#"+ data.name + " " + data.media_count);
+	var print = "#" + data.name + " " + numberWithCommas(data.media_count);
 	result.text(print);
 	return result;
 };
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 var getTagTotals = function(tag) {
 	// the parameters we need to pass in our request to StackOverflow's API
