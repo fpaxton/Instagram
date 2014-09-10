@@ -72,7 +72,6 @@ form input:last-child {
 }
 
 #list_container{
-
 }
 
 #target {
@@ -89,6 +88,7 @@ form input:last-child {
 
 #target ol li {
 	position:relative;
-	left: 1em;
-	font-size:.5em;
+	right:1em;
+	font-size:.4em;
 }
+
