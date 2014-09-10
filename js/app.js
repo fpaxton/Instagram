@@ -39,7 +39,7 @@ var getTagTotals = function(tag) {
 	})
 	.fail(function(jqXHR, error, errorThrown){
 		console.log("your response is bad and you should feel bad");
-		//var errorElem = showError(error);
-		//$('.search-results').append(errorElem);
+		var errorElem = showError(error);
+		$('.target').append(errorElem);
 	});
 };
