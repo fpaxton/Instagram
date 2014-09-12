@@ -75,13 +75,17 @@ form input:last-child {
 	display:block;
 }
 
+#error {
+	text-align:center;
+}
+
 #reset {
 	text-align:center;
-	margin-top:8em;
+	margin-top:16em;
 }
 
 #button {
-	font-size:1.1em;
+	font-size:.8em;
 	/*font-weight:bold;*/
 	background-color:#F7F7F7;
 	color:#005078;

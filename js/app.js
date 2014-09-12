@@ -4,13 +4,12 @@ $(document).ready(function() {
 		if (listCount()) {
 			console.log('30 tags max');
 		}
-		// zero out results if previous search has run
-		//$('#target').html('');
-
-		//get the value of the tags the user submitted
-		var tag = $(this).find("input[name='place']").val();
-		getTagTotals(tag);
-		$('#input_tag').children('#text').val('');
+		//else {
+			//get the value of the tags the user submitted
+			var tag = $(this).find("input[name='place']").val();
+			getTagTotals(tag);
+			$('#input_tag').children('#text').val('');
+		//}
 	});
 
 	$('#button').click(function(event){
@@ -56,15 +55,28 @@ var sortDisplay = function() {
 	var contents = [];
 	//console.log($('#target ol li').text());
 	$('#target #display > li').each (function() {
-		liContents.push([removeDigits($(this).text()), parseInt(removeNonDigits($(this).text()),10)]);
-		console.log(parseInt(removeNonDigits($(this).text()),10));
+		liContents.push([removeCommas(removeDigits($(this).text())), parseInt(removeNonDigits($(this).text()),10)]);
+		//console.log(parseInt(removeNonDigits($(this).text()),10));
 	});
 
 	liContents.sort(numOrdAsc);
+	for (var x = 0; x < liContents.length; x++) {
+		console.log(liContents[x]);
+	}
 	$('#target #display > li').each(function() {
 		contents.unshift(liContents.pop());
-		$(this).text(contents[0][0] + " " + contents[0][1]);
-	})
+		var tag_name = contents[0][0];
+		var tag_count = contents[0][1];
+		$(this).text(tag_name + " " + tag_count);
+	});
+
+	$('#target #display > li').each(function() {
+		console.log($(this).text());
+		console.log($(this).text().indexOf(",") == -1);
+		if (($(this).text()).indexOf(",") == -1) {
+			$(this).text(numberWithCommas($(this).text()));
+		}
+	});
 };
 
 function listCount(){
@@ -88,7 +100,11 @@ function removeDigits(str) {
 	return(str.replace(/\d+/g,''));
 }
 
-// using toLocalString()
-// function numberWithCommas(x) {
-//     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-// }
+// not using toLocaleString()
+function numberWithCommas(str) {
+    return (str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+}
+
+function removeCommas(str) {
+	return(str.replace(/[,]+/g, ""));
+}
