@@ -21,6 +21,7 @@ body {
 	background-color:#F7F7F7;
 	color:#005078;
 	font-family:"Trebuchet MS";
+	margin:0;
 }
 
 /*#header_container {
@@ -32,15 +33,28 @@ body {
 	left: 20px;
 }*/
 
+@-webkit-keyframes colorWheel {
+  0% { background-color: #d13632; } /* Red */
+  20% { background-color: #ec883a; } /* Orange */
+  40% { background-color: #005078; } /* Blue — Skip Yellow since there's not enough contrast */
+  60% { background-color: #8a2aa7; } /* Indigo */
+  80% { background-color: #d33264; } /* Violet */
+  100% { background-color: #d13632; } /* Red — have to cycle back so it doesn't skip */
+}
+
 header {
 	position:fixed;
-	left:20px;
-	width:44%;
+	left:0px;
+	width:50%;
+	max-width: 500px;
 	height:100%;
-	background-color:#005078;
 	color:#F7F7F7;
 	padding-top:11em;
 	padding-bottom:17.5em;
+	background-color:#005078;
+    -webkit-animation-name: colorWheel;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-duration: 60s; /* 60 Second Cycle through the colorWheel */
 }
 
 h1 {
