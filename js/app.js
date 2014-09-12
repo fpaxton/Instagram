@@ -2,18 +2,20 @@
 $(document).ready(function() {
 	$('#input_tag').submit(function(event){
 		if (listCount()) {
-			console.log('30 tags max');
+			$('#error').text('30 tag limit');
 		}
-		//else {
+		else {
 			//get the value of the tags the user submitted
+			$('#error').text('');
 			var tag = $(this).find("input[name='place']").val();
 			getTagTotals(tag);
 			$('#input_tag').children('#text').val('');
-		//}
+		}
 	});
 
 	$('#button').click(function(event){
 		$('#display').empty();
+		$('#error').text('');
 		$('#text').focus();
 	});
 });
