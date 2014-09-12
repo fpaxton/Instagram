@@ -4,7 +4,9 @@
 
 $(document).ready(function() {
 	$('#input_tag').submit(function(event){
-		console.log(listCount());
+		if (listCount()) {
+			console.log('30 tags max');
+		}
 		// zero out results if previous search has run
 		//$('#target').html('');
 
