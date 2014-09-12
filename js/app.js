@@ -1,7 +1,4 @@
-//why is sortDisplay() ahead of .ajax
-
 //var sort = [0];
-
 $(document).ready(function() {
 	$('#input_tag').submit(function(event){
 		if (listCount()) {
@@ -15,6 +12,10 @@ $(document).ready(function() {
 		getTagTotals(tag);
 		$('#input_tag').children('#text').val('');
 	});
+
+	$('#button').click(function(event){
+		$('#display').empty();
+	});
 });
 
 var showTagTotals = function(data) {
@@ -22,42 +23,8 @@ var showTagTotals = function(data) {
 	// var print = "#" + data.name + " " + numberWithCommas(data.media_count);
 	var print = "#" + data.name + " " + data.media_count //.toLocaleString();
 	result.text(print);
-	//totalSort(data);
 	return result;
 };
-
-// var totalSort = function(num) {
-// 	if (sort[0] == 0) {
-// 		sort[0] = num;
-// 		console.log('brand new');
-// 	}
-// 	else if (num.media_count > sort[sort.length - 1].media_count) {
-// 		for (x = 0; x < sort.length; x++) {
-// 			if (num.media_count > sort[x].media_count) {
-// 				sort.splice(x, 0, num);
-// 				x = sort.length;
-// 			}
-// 		}
-// 	}
-// 	else {
-// 		sort.push(num);
-// 	}
-// 	// sort should not contain more than 30 values
-// 	if (sort.length == 31) {
-// 		sort.pop();
-// 	}
-
-// 	//debug
-// 	for (x = 0; x < sort.length; x++) {
-// 		console.log(sort[x]);
-// 	}
-// 	console.log("Index of: " + sort.indexOf(num));
-// 	console.log("Array size: " + sort.length);
-// 	console.log('end of totalSort');
-// 	//end debug
-
-// 	return sort.indexOf(num);
-// }
 
 var getTagTotals = function(tag) {
 	// the parameters we need to pass in our request to StackOverflow's API
@@ -73,9 +40,6 @@ var getTagTotals = function(tag) {
 	})
 	.done(function(result){
 		var rank = showTagTotals(result.data);
-		//var location = totalSort(result.data);
-		//$('#target ol:nth-child('+ (location + 1) +')').prepend(rank);
-		// $('#target ol:nth-child(1)').append(rank);
 		$('#target ol').append(rank);
 		//console.log($('#target #display > li').text());
 		sortDisplay();
@@ -98,9 +62,6 @@ var sortDisplay = function() {
 
 	liContents.sort(numOrdAsc);
 	$('#target #display > li').each(function() {
-		//console.log('call');
-		//var tag_name = removeDigits($(this).text());
-		//console.log(tag_name);
 		contents.unshift(liContents.pop());
 		$(this).text(contents[0][0] + " " + contents[0][1]);
 	})
