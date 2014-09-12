@@ -14,6 +14,7 @@ $(document).ready(function() {
 
 	$('#button').click(function(event){
 		$('#display').empty();
+		$('#text').focus();
 	});
 });
 
@@ -106,5 +107,5 @@ function numberWithCommas(str) {
 }
 
 function removeCommas(str) {
-	return(str.replace(/[,]+/g, ""));
+	return(str.replace(/[,]+/g, ''));
 }
