@@ -2,25 +2,33 @@
 $(document).ready(function() {
 	$('#input_tag').submit(function(event){
 		if (listCount()) {
-			console.log('30 tags max');
+			$('#error').text('30 tag limit');
 		}
-		//else {
+		else {
 			//get the value of the tags the user submitted
+			$('#error').text('');
 			var tag = $(this).find("input[name='place']").val();
 			getTagTotals(tag);
 			$('#input_tag').children('#text').val('');
-		//}
+		}
 	});
 
+	//'start new list' button clears all tags || <li> from <ol>
 	$('#button').click(function(event){
 		$('#display').empty();
+		$('#error').text('');
+		$('#text').focus();
+	});
+
+	//remove unwanted or duplicate list item
+	$('li').click(function(event){
+		$(this).remove();
 	});
 });
 
 var showTagTotals = function(data) {
 	var result = $('.template ol li:first-child');
-	// var print = "#" + data.name + " " + numberWithCommas(data.media_count);
-	var print = "#" + data.name + " " + data.media_count //.toLocaleString();
+	var print = "#" + data.name + " " + data.media_count;
 	result.text(print);
 	return result;
 };
@@ -40,7 +48,6 @@ var getTagTotals = function(tag) {
 	.done(function(result){
 		var rank = showTagTotals(result.data);
 		$('#target ol').append(rank);
-		//console.log($('#target #display > li').text());
 		sortDisplay();
 	})
 	.fail(function(jqXHR, error, errorThrown){
@@ -53,16 +60,14 @@ var getTagTotals = function(tag) {
 var sortDisplay = function() {
 	var liContents = [];
 	var contents = [];
-	//console.log($('#target ol li').text());
 	$('#target #display > li').each (function() {
 		liContents.push([removeCommas(removeDigits($(this).text())), parseInt(removeNonDigits($(this).text()),10)]);
-		//console.log(parseInt(removeNonDigits($(this).text()),10));
 	});
 
 	liContents.sort(numOrdAsc);
-	for (var x = 0; x < liContents.length; x++) {
-		console.log(liContents[x]);
-	}
+	// for (var x = 0; x < liContents.length; x++) {
+	// 	console.log(liContents[x]);
+	// }
 	$('#target #display > li').each(function() {
 		contents.unshift(liContents.pop());
 		var tag_name = contents[0][0];
@@ -71,8 +76,6 @@ var sortDisplay = function() {
 	});
 
 	$('#target #display > li').each(function() {
-		console.log($(this).text());
-		console.log($(this).text().indexOf(",") == -1);
 		if (($(this).text()).indexOf(",") == -1) {
 			$(this).text(numberWithCommas($(this).text()));
 		}
@@ -106,5 +109,5 @@ function numberWithCommas(str) {
 }
 
 function removeCommas(str) {
-	return(str.replace(/[,]+/g, ""));
+	return(str.replace(/[,]+/g, ''));
 }

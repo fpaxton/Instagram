@@ -98,6 +98,7 @@ form input:last-child {
 }
 
 #list_container{
+	text-align: right;
 }
 
 #target {
@@ -115,6 +116,8 @@ form input:last-child {
 #target ol li {
 	position:relative;
 	right:1em;
-	font-size:.4em;
+	font-size:23px;
+	margin-left:40px;
+	margin-right:150px;
 }
 
